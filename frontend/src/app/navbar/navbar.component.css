@@ -1,0 +1,19 @@
+.logo{
+    padding: 0 !important;
+}
+.navbar-default {
+    background-color: white !important;
+    border-color: white !important;
+}
+.logo_txt{
+    top: 10px;
+}
+.signup{
+    top: -3px;
+}
+.Ad{
+    top: -11px;
+}
+.navbar-collapse {
+    margin: 21px 0px;
+}
