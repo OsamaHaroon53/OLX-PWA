@@ -10,6 +10,9 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { CategoryComponent } from './category/category.component';
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
