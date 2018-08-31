@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import {HttpModule} from '@angular/http'; 
 
 import { AppComponent } from './app.component';
 import { RoutingModule , routingComponent } from './routing/routing.module';
@@ -9,6 +11,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { CategoryComponent } from './category/category.component';
+
+import { HttpServicesService } from "./Services/http-services.service";
 
 
 
@@ -25,9 +29,11 @@ import { CategoryComponent } from './category/category.component';
   imports: [
     BrowserModule,
     RoutingModule,
+    FormsModule,
+    HttpModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [HttpServicesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
