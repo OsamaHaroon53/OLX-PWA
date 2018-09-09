@@ -1,0 +1,47 @@
+.col-md-12{
+    height:50px;
+    }
+.form-heading{
+    border-bottom:1px solid black;
+    padding:5px;
+    text-align:left;
+    margin:0;
+    margin-left:-15px;
+    width:105%;
+    }
+    label>span{
+        color : red;
+    }
+    .title{
+        margin-top:5%;
+        text-align: center;
+    }	
+    label{
+        font-size:19px;
+        font-weight:lighter;
+    }
+    .category{
+        height:100px;
+        margin-top:3%;
+        border-bottom:1px solid gray;
+        text-align: center;
+    }
+    textarea.form-control{
+        height:140px;
+    }
+    .description{
+        border-bottom:1px solid gray;
+    }
+    .myform{
+        border:1px solid gray;
+        
+    }
+    .submit{
+        padding-bottom: 15px;
+    }
+    .submit>button{
+        padding: 7px 30px;
+    }
+    .d-none{
+        display:none;
+    }

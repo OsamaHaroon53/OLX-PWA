@@ -14,10 +14,25 @@
       <ul class="nav navbar-nav">
         <li class="logo_txt"><strong>Pakistan Best Marketplace</strong></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" *ngIf="!isUser()">
         <li class="signup">
           <a routerLink="/login">
             <span class="glyphicon glyphicon-user"></span> My Account</a>
+        </li>
+        <li class="Ad">
+          <a routerLink="/posting">
+            <button type="button" class="btn btn-warning">Submit a Free Ad</button>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" *ngIf="isUser()">
+        <li class="signup">
+          <a routerLink="/login">
+            <span class="glyphicon glyphicon-user"></span> My Ads</a>
+        </li>
+        <li class="signup">
+          <a (click)="LogOut()">
+            <span class="glyphicon glyphicon-user"></span> LogOut</a>
         </li>
         <li class="Ad">
           <a routerLink="/posting">

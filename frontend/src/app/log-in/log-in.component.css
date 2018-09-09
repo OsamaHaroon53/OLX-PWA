@@ -1,3 +1,9 @@
 .login-form{
     margin-top: 50px;   
 }
+.d-none{
+    display:none;
+}
+small{
+    margin-left: 50px;
+}

@@ -1,64 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServicesService } from "../Services/http-services.service";
 import { Router } from '@angular/router';
-import { isUndefined } from 'util';
+import { User } from '../user';
+import {AuthService} from '../Services/auth.service';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  public name: String;
-  public password: String;
-  public confirm_Password: String;
-  public email: String;
-  public contact_No: Number;
+ 
   public valid: boolean;
-  public msg: String;
+  public remember1: boolean;
+  public msg: string;
 
-  constructor(private http: HttpServicesService, private router: Router) { }
+  userModel = new User("","","","",null);
 
+  constructor(private http: HttpServicesService, private router: Router,private authService :AuthService) { }
+
+  passwordMatch(){
+    if(this.userModel.confirm_Password==this.userModel.password){
+      return true;
+    }
+    return false;
+  }
   signUp(){
-    console.log(this.name, this.password, this.confirm_Password, this.email, this.contact_No);
-    console.log(String(this.contact_No).length === 10,this.name !== "" , this.password !== "" , this.confirm_Password !== "", this.email !== "", !isUndefined(this.contact_No));
-    if (this.name !== "" && this.password !== "" && this.confirm_Password !== "" && this.email !== "" && this.contact_No !=null && 
-    !isUndefined(this.contact_No) && !isUndefined(this.name) && !isUndefined(this.confirm_Password) && !isUndefined(this.password) && !isUndefined(this.email) ){
-      if (String(this.contact_No).length === 10) {
-        console.log(this.password,this.confirm_Password)
-        if (this.password == this.confirm_Password) {
-          let register = {
-            name: this.name,
-            password: this.password,
-            email: this.email,
-            contact_No: this.contact_No
-          }
-          this.http.addData('signup', register).subscribe(data => {
-            if (data.sucess) {
+    
+          this.http.addData('signup', this.userModel).subscribe(data => {
+            if (data.success) {
+              this.authService.storeUserData(data.token , data.data.name);
               this.router.navigate(["/posting"]);
             }
             else {
-              this.msg = "Contact_No or Password incorrect  ";
+              this.msg = data.message;
               this.valid = true;
             }
-          });
-        }
-        else {
-          this.msg = "Password not match  ";
-          this.valid = true;
-        }
-      }
-      else {
-        this.msg = "Contact_No should be 10 digits  ";
-        this.valid = true;
-      }
-    }
-    else {
-      this.msg = "Fields are empty  ";
-      this.valid = true;
-    }
+          },error=>{
+            this.msg="Error: Server Not found";
+            this.valid = true;
+          }
+        );
+
+        
   }
   ngOnInit() {
-    this.valid = false;
+    this.valid=false;
+    this.remember1=false;
   }
 
 }

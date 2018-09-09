@@ -8,7 +8,7 @@
     </h4>
 
   </legend>
-  <!-- Success message -->
+  <!-- fail message -->
   <div class="alert alert-danger" role="alert" *ngIf="valid">{{this.msg}}
     <i class="glyphicon glyphicon-remove"></i> LogIn Fail!.
   </div>
@@ -20,29 +20,30 @@
           <strong>Login</strong>
         </div>
         <div class="panel-body">
-          <form class="form-horizontal" (submit)="logIn()">
+          <form class="form-horizontal" #user="ngForm" (submit)="logIn()">
             <div class="form-group">
               <label for="inputEmail3" class="col-md-3 control-label">Contact_No</label>
-              <div class="col-md-9">
-                <input type="number" class="form-control" name="contact_No" placeholder="(+92)" [(ngModel)]="contact_No" required>
+              <div class="col-md-9" [class.has-error]="contact.invalid && contact.touched">
+                <input type="number" #contact="ngModel" required pattern="^\d{10}$" [(ngModel)]="userModel.contact_No" class="form-control" name="contact_No" placeholder="(+92)">
               </div>
+              <small class="alert-danger" [class.d-none]="contact.valid || contact.untouched">Required and Must be between 10 digits</small>
             </div>
             <div class="form-group">
               <label for="inputPassword3" required class="col-md-3 control-label">Password</label>
-              <div class="col-md-9">
-                <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="password" required >
+              <div class="col-md-9" [class.has-error]="password.invalid && password.touched">
+                <input type="password" [(ngModel)]="userModel.password" #password="ngModel" required pattern="^(?=.*\d).{4,8}$" class="form-control" name="password" placeholder="Password">
               </div>
+              <small class="alert-danger" [class.d-none]="password.valid || password.untouched">Incorrect Password</small>
             </div>
             <div class="col-md-4"></div>
             <div class="form-group last">
               <div class="col-md-offset-3 col-md-9">
-                <button type="submit" class="btn btn-success btn-md">Sign in</button>
+                <button type="submit" class="btn btn-success btn-md"[disabled]="!user.form.valid">Sign in</button>
                 <button type="reset" class="btn btn-default btn-md">Reset</button>
               </div>
             </div>
           </form>
         </div>
-
       </div>
     </div>
   </div>

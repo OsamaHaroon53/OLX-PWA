@@ -13,6 +13,10 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { CategoryComponent } from './category/category.component';
 
 import { HttpServicesService } from "./Services/http-services.service";
+import { PostsComponent } from './posts/posts.component';
+import { AuthService } from "./Services/auth.service";
+import { AuthsGuard } from "./Services/auths.guard";
+
 
 
 
@@ -24,7 +28,8 @@ import { HttpServicesService } from "./Services/http-services.service";
     NavbarComponent,
     FooterComponent,
     SearchBarComponent,
-    CategoryComponent
+    CategoryComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,7 @@ import { HttpServicesService } from "./Services/http-services.service";
     HttpModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [HttpServicesService],
+  providers: [HttpServicesService,AuthService,AuthsGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,14 +1,18 @@
 <div class="container search1">
-  <form action="" method="GET"> 
+  <form #search="ngForm" (submit)="Search()"> 
       <div class="row">
         <div class="col-xs-4 col-md-4">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Location"/>
+            <select class="form-control" required placeholder="Enter Location"  [(ngModel)]="location" name="location">
+              <option  selected disabled>Location</option>
+               <option *ngFor="let items of locations">{{items.location}}</option>
+          </select>
           </div>
         </div>
         <div class="col-xs-8 col-md-8">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" id="txtSearch"/>
+            <input type="text" name="search" [(ngModel)]="searchKey" class="form-control" placeholder="Search" id="txtSearch"/>
+            
             <div class="input-group-btn">
               <button class="btn btn-primary" type="submit">
                 <span class="search">Search</span>

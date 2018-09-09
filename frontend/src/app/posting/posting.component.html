@@ -1,4 +1,119 @@
-<div class="container">		
-    <fieldset><legend>Submit a Free Classified Ad</legend></fieldset>
-    
-</div>	
+    <div class="row">
+        <div class="col-md-12"> </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-xs-1"></div>
+        <div class="col-md-6 col-xs-10 myform">
+            <form #posting="ngForm" (submit)="Posting()">
+                <div class="form-heading">
+                    <h4>Submit a Free Classified Ad</h4>
+                </div>
+                <div class="row title">
+                    <div class="col-md-4 form-group">
+                        <label>Ad Title
+                            <span>*</span>
+                        </label>
+                    </div>
+                    <div class="col-md-6" [class.has-error]="title.invalid && title.touched">
+                        <input type="text" required class="form-control" #title="ngModel" name="title" [(ngModel)]="model.title"/>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <small class="alert-danger" [class.d-none]="title.valid || title.untouched">Title is Required</small>
+                </div>
+                
+                <div class="row title">
+                    <div class="col-md-4 form-group">
+                        <label>Image
+                        </label>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <input type="file" name="image" accept="image/*" (change)="onFileChanged($event)">
+                    </div>
+                    <div class="col-md-2"></div>
+                    <small class="alert-danger" [class.d-none]="imageValidation()">File must be Image</small>
+                </div>
+                <div class="row category">
+                    <div class="col-md-4 form-group">
+                        <label>Category
+                            <span>*</span>
+                        </label>
+                    </div>
+                    <div class="col-md-6 form-group" [class.has-error]="category.invalid && category.touched">
+                        <select class="form-control" #category="ngModel" required name="category" [(ngModel)]="model.category">
+                            <option value="properties">Properties</option>
+                            <option value="cars">Cars</option>
+                            <option value="furniture">Furniture</option>
+                            <option value="jobs">Jobs</option>
+                            <option value="jobs">Jobs</option>
+                            <option value="jobs">Jobs</option>
+                            <option value="jobs">Jobs</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <small class="alert-danger" [class.d-none]="category.valid || category.untouched">Category is Required</small>
+                </div>
+                
+                <div class="row title description">
+                    <div class="col-md-5 form-group">
+                        <label>Add Description</label>
+                    </div>
+                    <div class="col-md-7 form-group">
+                        <textarea class="form-control" style="resize: none;" name="description" [(ngModel)]="model.description"></textarea>
+                    </div>
+                </div>
+                <div class="row title">
+                    <div class="col-md-4 form-group">
+                        <label>Name
+                            <span>*</span>
+                        </label>
+                    </div>
+                    <div class="col-md-6" [class.has-error]="name.invalid && name.touched">
+                        <input type="text" required class="form-control" #name="ngModel" name="name" [(ngModel)]="model.name"/>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <small class="alert-danger" [class.d-none]="name.valid || name.untouched">Name is Required</small>
+                </div>
+                <div class="row title">
+                    <div class="col-md-4 form-group">
+                        <label>Phone number
+                            <span>*</span>
+                        </label>
+                    </div>
+                    <div class="col-md-6" [class.has-error]="contact.invalid && contact.touched">
+                        <input type="number" required #contact="ngModel" placeholder="(+92)" pattern="^\d{10}$" value="+92" class="form-control" #category="ngModel" name="contact_No" [(ngModel)]="model.contact_No"/>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <small class="alert-danger" [class.d-none]="contact.valid || contact.untouched">Must be 10 digits</small>
+                </div>
+                <div class="row title">
+                    <div class="col-md-4 form-group" [class.has-error]="location.invalid && location.touched">
+                        <label>select city
+                            <span>*</span>
+                        </label>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-control" #location="ngModel" required name="location" [(ngModel)]="model.location">
+                            <option *ngFor="let items of locations">{{items.location}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <small class="alert-danger" [class.d-none]="location.valid || location.untouched">Location is Required</small>
+                </div>
+                <div class="row title">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 submit">
+                        <button type="submit" class="btn btn-primary" [disabled]="!(posting.form.valid && imageValidation())">
+                            Sumbit</button>
+                    </div>
+
+                    <div class="col-md-4"></div>
+                    {{model | json}}
+                </div>
+            </form>
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="false">{{this.msg}}
+            <i class="glyphicon glyphicon-remove"></i> Posting Fail!.
+          </div>
+        <div class="col-md-3 col-xs-1"></div>
+
+    </div>

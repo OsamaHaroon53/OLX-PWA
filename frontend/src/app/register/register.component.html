@@ -1,6 +1,6 @@
 <div class="container">
     <br>
-    <form class="form-horizontal" method="post" id="contact_form" (submit)="signUp()">
+    <form class="form-horizontal" id="contact_form" #register="ngForm" (submit)="signUp()">
         <fieldset>
             <legend style="border-bottom: none;">
 
@@ -8,91 +8,105 @@
                     <b>Registration Form</b>
                 </h2>
             </legend>
-            <div class="alert alert-danger" role="alert" *ngIf="valid">{{this.msg}}
-                <i class="glyphicon glyphicon-remove"></i> Registration Fail!.
-            </div>
+
             <div class="form-group">
                 <label class="col-md-4 control-label">Name
                     <span class="imp">*</span>
                 </label>
-                <div class="col-md-4 inputGroupContainer">
+                <div class="col-md-4 inputGroupContainer" [class.has-error]="name.invalid && name.touched">
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-user"></i>
                         </span>
-                        <input name="name" placeholder="Name" class="form-control" type="text" [(ngModel)]="name">
+                        <input name="name" #name="ngModel" required placeholder="Name" class="form-control" type="text" [(ngModel)]="userModel.name">
                     </div>
                 </div>
+                <small class="alert-danger" [class.d-none]="name.valid || name.untouched">Name is Required</small>
             </div>
-
+            
             <div class="form-group">
                 <label class="col-md-4 control-label">Password
                     <span class="imp">*</span>
                 </label>
-                <div class="col-md-4 inputGroupContainer">
+                <div class="col-md-4 inputGroupContainer" [class.has-error]="password.invalid && password.touched">
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-user"></i>
                         </span>
-                        <input name="user_password" placeholder="Password" class="form-control" type="password" [(ngModel)]="password">
+                        <input name="password" #password="ngModel" required pattern="^(?=.*\d).{4,8}$" placeholder="Password" class="form-control"
+                            type="password" [(ngModel)]="userModel.password">
                     </div>
                 </div>
+                <small class="alert-danger" [class.d-none]="password.valid || password.untouched">Must be between 4 and 8 digits long and include at least one numeric digit.</small>
             </div>
 
             <div class="form-group">
                 <label class="col-md-4 control-label">Confirm Password
                     <span class="imp">*</span>
                 </label>
-                <div class="col-md-4 inputGroupContainer">
+                <div class="col-md-4 inputGroupContainer" [class.has-error]="confirm.invalid && confirm.touched">
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-user"></i>
                         </span>
-                        <input name="confirm_password" placeholder="Confirm Password" class="form-control" type="password" [(ngModel)]="confirm_Password">
+                        <input name="confirm_Password" required pattern="^(?=.*\d).{4,8}$" #confirm="ngModel" placeholder="Confirm Password" class="form-control"
+                            type="password" [(ngModel)]="userModel.confirm_Password">
+
                     </div>
                 </div>
+                <small class="alert-danger" [class.d-none]="confirm.valid || confirm.untouched">Must be between 4 and 8 digits long and include at least one numeric digit</small>
+                <small class="alert-danger" [class.d-none]="(password.invalid && password.touched) || (confirm.invalid && confirm.touched) || confirm.untouched || password.untouched || passwordMatch()">Password not match</small>
             </div>
+
 
             <div class="form-group">
                 <label class="col-md-4 control-label">E-Mail</label>
-                <div class="col-md-4 inputGroupContainer">
+                <div class="col-md-4 inputGroupContainer" [class.has-error]="email.invalid && email.touched">
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-envelope"></i>
                         </span>
-                        <input name="email" placeholder="E-Mail Address" class="form-control" type="email" [(ngModel)]="email">
+                        <input name="email" #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="E-Mail Address" class="form-control" type="email" [(ngModel)]="userModel.email">
                     </div>
                 </div>
+                <small class="alert-danger" [class.d-none]="email.valid || email.untouched">Invalid Email</small>
             </div>
 
             <div class="form-group">
                 <label class="col-md-4 control-label">Contact No.
                     <span class="imp">*</span>
                 </label>
-                <div class="col-md-4 inputGroupContainer">
+                <div class="col-md-4 inputGroupContainer" [class.has-error]="contact.invalid && contact.touched">
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-earphone"></i>
                         </span>
-                        <input name="contact_no" placeholder="(+92)" class="form-control" type="number" [(ngModel)]="contact_No">
+                        <input name="contact_no" #contact="ngModel" required pattern="^\d{10}$" placeholder="(+92)" class="form-control" type="number"
+                            [(ngModel)]="userModel.contact_No">
                     </div>
                 </div>
+                <small class="alert-danger" [class.d-none]="contact.valid || contact.untouched">Required and Must be 10 digits</small>
             </div>
 
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <label class="col-md-4">
-                    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> By creating an account you agree to our
+                    <input type="checkbox" name="remember" #remember="ngModel" style="margin-bottom:15px" [(ngModel)]="remember1"> By creating an account you agree to our
                     <a href="#" style="color:dodgerblue">Terms & Privacy</a>.
                 </label>
             </div>
 
+            <div class="alert alert-danger" role="alert" *ngIf="valid">{{this.msg}}
+                <i class="glyphicon glyphicon-remove"></i> Register Fail!.
+              </div>
+
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-4 col-md-offset-1">
-                    <button type="submit" class="btn btn-warning">REGISTER</button>
+                    <button [disabled]="!(remember1 && register.form.valid && passwordMatch())" type="submit" class="btn btn-warning">REGISTER</button>
                 </div>
             </div>
+
         </fieldset>
     </form>
 </div>
