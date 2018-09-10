@@ -13,9 +13,9 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { CategoryComponent } from './category/category.component';
 
 import { HttpServicesService } from "./Services/http-services.service";
-import { PostsComponent } from './posts/posts.component';
 import { AuthService } from "./Services/auth.service";
 import { AuthsGuard } from "./Services/auths.guard";
+import { PostComponent } from './post/post.component';
 
 
 
@@ -29,7 +29,7 @@ import { AuthsGuard } from "./Services/auths.guard";
     FooterComponent,
     SearchBarComponent,
     CategoryComponent,
-    PostsComponent
+    PostComponent
   ],
   imports: [
     BrowserModule,

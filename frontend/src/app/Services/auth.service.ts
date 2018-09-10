@@ -34,6 +34,8 @@ export class AuthService {
     if(token!=null){
       return helper.isTokenExpired(token);
     }
+    this.authToken = null;
+    this.user1 = null;
     return false;
   }
 

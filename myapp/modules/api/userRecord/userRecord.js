@@ -66,7 +66,7 @@ record.signIn = function (req, res) {
                 success: false,
                 message: " Internal Server Error"
             });
-        } else if (data.length == 0) {
+        } else if (!data) {console.log(data)
             res.send({
                 statusCode: 404,
                 success: false,

@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="col-xs-12" *ngIf="valid">
+        <div class="alert alert-danger" role="alert">{{this.msg}}
+            <i class="glyphicon glyphicon-remove"></i> Posting Fail!.
+        </div>
+    </div>
+    <div class="row first-row" *ngIf="!valid">
+        <div class="col-md-1"></div>
+        <div class="col-md-7 col-xs-8 items">
+            <div class="row">
+                <div class="items-content">
+                    <h3>{{data.title}}</h3>
+                    <span>Added at {{Date}}, Ad ID: {{data._id}}</span>
+                </div>
+                <div class="image-div">
+                    <img src="bed.png" class="img-responsive" alt="image">
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <img src="bed.PNG" alt="image" width="150" height="100">
+                </div>
+                <p>
+                    {{data.description}}
+                </p>
+                <br>
+                <br>
+                <br>
+                <p style="color:gray;">
+                    When you call, don't forget to mention that you found this ad on OLX.com
+                    <br> I do not wish to be contacted by telemarketers or representatives of any other website.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-4 items">
+            <div class="row" style="margin-top:15%;">
+                <div class="col-md-12">
+                    <h2>Rates : {{data.price}}</h2>
+                    <div class="user">
+                        <h3>{{data.name}}</h3>
+                        <p>
+                            {{data.contact_No}}
+                            <br>{{data.location}}
+                        </p>
+                    </div>
+                    <div class="chat">
+                        <button class="btn btn-danger">
+                            Login To Chat
+                        </button>
+                    </div>
+                    <div class="user">
+                        <h5 align="center">Safety Tips For Buyers</h5>
+                        <ol>
+                            <li>Meet seller at a safe location</li>
+                            <li>Check the item before you buy</li>
+                            <li>Pay only after collecting item</li>
+                        </ol>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
